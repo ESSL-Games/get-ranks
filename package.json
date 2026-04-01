@@ -1,18 +1,18 @@
 {
-  "name": "get-ranks",
-  "module": "src/index.ts",
-  "scripts": {
-    "dev": "bun --watch ./src/index.ts",
-    "build": "bun build ./src/index.ts --outdir ./build",
-    "start": "bun run ./build/index.js"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.4.10",
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "private": true,
-  "type": "module"
+	"name": "get-ranks",
+	"module": "src/index.ts",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.10",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"private": true,
+	"scripts": {
+		"dev": "bun --watch ./src/index.ts",
+		"build": "bun build ./src/index.ts --outdir ./build",
+		"start": "bun run ./build/index.js"
+	},
+	"type": "module"
 }

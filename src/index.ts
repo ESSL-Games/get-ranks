@@ -1,4 +1,5 @@
 import { ranks } from "./constants.ts";
+import { csv } from "./lib/csv.ts";
 import { log } from "./lib/log.ts";
 import { type ISeason, Valorant } from "./lib/valorant.ts";
 
@@ -27,7 +28,6 @@ for (let i = 0; i < namesList.length; i++) {
 				const rank = await valorant.fetchMmr(name, tag);
 				if (rank) {
 					if ("currentRank" in rank) {
-						await log(`      ${ranks[rank.currentRank]}`);
 						const seasonsAw = await valorant.seasons;
 
 						const actSeason = seasonsAw.find(
@@ -63,13 +63,22 @@ for (let i = 0; i < namesList.length; i++) {
 						const episode = episodeSeason?.Name;
 						const act = actSeason?.Name;
 
-						await log(`      ${ranks[rank.maxRank]} (${episode} // ${act})`);
+						const currentRank = ranks[rank.currentRank];
+						const peakRank = ranks[rank.maxRank];
+						const peakRankSeason = `${episode} // ${act}`;
+
+						await log(`      ${currentRank}`);
+						await log(`      ${peakRank} (${peakRankSeason})`);
+
+						await csv(currentRank, peakRank, peakRankSeason);
 					} else {
 						if (rank.playerDoesNotExist) {
 							await log("      Account doesn't Exists");
+							await csv();
 						}
 						if (rank.playerNeverPlayedRanked) {
 							await log("      Player never played comp or is not eligible");
+							await csv();
 						}
 					}
 				}
