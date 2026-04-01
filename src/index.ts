@@ -78,13 +78,22 @@ for (let i = 0; i < namesList.length; i++) {
 						}
 						if (rank.playerNeverPlayedRanked) {
 							await log("      Player never played comp or is not eligible");
-							await csv();
+							await csv("Unranked", "Unranked", " ");
 						}
 					}
+				} else {
+					await log("      invalid Valorant Name");
+					await csv();
 				}
+			} else {
+				await log("      invalid Valorant Name");
+				await csv();
 			}
 		} else {
 			await log("      invalid Valorant Name");
+			await csv();
 		}
+	} else {
+		await csv();
 	}
 }
